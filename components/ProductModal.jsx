@@ -43,11 +43,26 @@ export default function ProductModal({ product, onClose }) {
   const overlayRef = useRef(null);
 
   useEffect(() => {
+    const scrollY = window.scrollY;
+    const originalOverflow = document.body.style.overflow;
+    const originalPosition = document.body.style.position;
+    const originalTop = document.body.style.top;
+    const originalWidth = document.body.style.width;
+
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
+      document.body.style.position = originalPosition;
+      document.body.style.top = originalTop;
+      document.body.style.width = originalWidth;
+      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKey);
     };
   }, [onClose]);
@@ -81,6 +96,9 @@ export default function ProductModal({ product, onClose }) {
             background: "#fff",
             borderRadius: "28px 28px 0 0",
             boxShadow: "0 -4px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)",
+            maxHeight: "90vh",
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
           }}
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
@@ -109,10 +127,36 @@ export default function ProductModal({ product, onClose }) {
               <span className="cat-pill" style={{ background: "rgba(255,255,255,0.9)" }}>{product.categoria}</span>
             </div>
             {product.destacado && (
-              <div className="absolute top-3 right-3">
+              <div className="absolute top-3 right-3" style={{ marginRight: "3rem" }}>
                 <span className="badge-hot">♡ Top</span>
               </div>
             )}
+            {/* Botón cerrar (X) */}
+            <button
+              onClick={onClose}
+              aria-label="Cerrar"
+              className="btn-squish"
+              style={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                width: 34,
+                height: 34,
+                borderRadius: "50%",
+                background: "rgba(26,20,20,0.55)",
+                backdropFilter: "blur(4px)",
+                border: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                zIndex: 20,
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1L13 13M13 1L1 13" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/>
+              </svg>
+            </button>
           </div>
 
           {/* Info */}
@@ -158,7 +202,7 @@ export default function ProductModal({ product, onClose }) {
                   flexShrink: 0,
                 }}
               >
-                ¡Me encanta! ♡
+                Cerrar ♡
               </button>
             </div>
           </div>
