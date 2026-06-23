@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --white:     #FFFCFA;
+  --off-white: #F4F0EB;
+  --pink:      #FF6B8A;
+  --pink-deep: #E8537A;
+  --pink-soft: #FFE9EF;
+  --pink-mid:  #FFCAD8;
+  --peach:     #FFB088;
+  --peach-soft:#FFE8DA;
+  --cream:     #FFF6ED;
+  --black:     #1A1414;
+  --gray-dark: #44403D;
+  --gray-mid:  #8A8580;
+  --gray-light:#E8E2DC;
+  --radius-card: 22px;
+  --radius-pill: 100px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: 'Fraunces', Georgia, serif; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 99px; }
+
+/* Card */
+.menu-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  border: 1.5px solid #F2EBE5;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(.2,.8,.3,1.2), border-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.menu-card:hover {
+  box-shadow: 0 14px 36px rgba(255,107,138,0.16), 0 2px 8px rgba(0,0,0,0.04);
+  border-color: var(--pink-mid);
+  transform: translateY(-4px) rotate(-0.6deg);
+}
+.menu-card:nth-child(even):hover { transform: translateY(-4px) rotate(0.6deg); }
+.menu-card:active { transform: translateY(-1px) scale(0.99); }
+
+/* Filter tab */
+.filter-tab {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #F0E8E2;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  background: #fff;
+  color: var(--gray-mid);
+}
+.filter-tab:hover { color: var(--black); border-color: var(--pink-mid); transform: translateY(-1px); }
+.filter-tab.active {
+  background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(255,107,138,0.4);
+}
+
+/* Category pill on card */
+.cat-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--pink-soft);
+  color: var(--pink-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Price */
+.price {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--black);
+}
+
+/* Modal backdrop */
+.modal-bg {
+  background: rgba(26,20,20,0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Img placeholder gradient */
+.img-placeholder {
+  background: linear-gradient(135deg, #FFE9EF 0%, #FFE8DA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sticky filter shadow */
+.filter-bar {
+  background: rgba(255,252,250,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hide scrollbar on filter row */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Badge highlight */
+.badge-hot {
+  background: linear-gradient(135deg, var(--pink), var(--peach));
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 3px 10px rgba(255,107,138,0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Squish button */
+.btn-squish {
+  transition: transform 0.15s cubic-bezier(.34,1.56,.64,1), box-shadow 0.15s ease;
+}
+.btn-squish:hover { transform: scale(1.05) rotate(-1deg); }
+.btn-squish:active { transform: scale(0.94); }
+
+/* Wonky title underline */
+.wonky-underline {
+  position: relative;
+  display: inline-block;
+}
